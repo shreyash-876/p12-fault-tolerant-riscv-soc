@@ -1,0 +1,8 @@
+set root C:/Users/asus/Documents/RTL_project/p12_final/p12_final
+# create project: source $root/scripts/create_project.tcl
+# switch the ITCM program: set_firmware fw_board_demo   (then re-run synthesis)
+# program the board:
+open_hw_manager; connect_hw_server; open_hw_target
+set dev [lindex [get_hw_devices xc7z010*] 0]; current_hw_device $dev
+set_property PROGRAM.FILE $root/vivado/p12.runs/impl_1/zybo_top.bit $dev
+program_hw_devices $dev

@@ -1,0 +1,33 @@
+# =============================================================================
+# Git Ignore for P12 Fault-Tolerant RISC-V SoC Project
+# =============================================================================
+
+# Vivado project caches, runs, temporary files
+vivado/
+vivado_fw/
+**/vivado_daec/
+**/.Xil/
+**/*.jou
+**/*.log
+**/*.str
+**/*.wdb
+**/*.vcd
+**/*.dcp
+**/*.dmp
+**/*.pb
+**/*.rpt.old
+**/hs_err_pid*
+
+# Simulation temporary outputs (Icarus / ModelSim)
+*.vvp
+*.out
+work/
+transcript
+
+# OS / Editor temporary files
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.vscode/.history/
+.idea/

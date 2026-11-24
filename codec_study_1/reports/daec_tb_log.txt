@@ -1,0 +1,18 @@
+WARNING: ../tb/tb_daec_codec.sv:143: $readmemh(daec_vectors.hex): Not enough words in the file for the requested range [0:65535].
+tb_daec_codec: 54204 golden vectors (SEC-DED-DAEC, Dutta and Touba)
+  encoders: IMPL 0 ref, 1 flat, 2 CSE, 3 tree
+  decoders: IMPL 0-3 (PIPE 0), IMPL 2 PIPE 1
+
+  encoder IMPL 0          : 108408 checks, 0 errors
+  encoder IMPL 1          : 108408 checks, 0 errors
+  encoder IMPL 2          : 108408 checks, 0 errors
+  encoder IMPL 3          : 108408 checks, 0 errors
+  decoder IMPL 0, PIPE 0 : 108408 valid outputs, 885377 checks, 0 errors
+  decoder IMPL 1, PIPE 0 : 108408 valid outputs, 885377 checks, 0 errors
+  decoder IMPL 2, PIPE 0 : 108408 valid outputs, 885377 checks, 0 errors
+  decoder IMPL 3, PIPE 0 : 108408 valid outputs, 885377 checks, 0 errors
+  decoder IMPL 2, PIPE 1 : 108408 valid outputs, 885377 checks, 0 errors
+  idle cycles inserted in phase 2: 18109
+PASS: 4860517 checks, 0 errors
+../tb/tb_daec_codec.sv:179: $finish called at 2530441000 (1ps)
+DONE

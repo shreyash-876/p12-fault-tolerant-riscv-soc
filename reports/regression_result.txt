@@ -1,0 +1,15 @@
+P12 regression (Sun Nov  8 06:39:03 UTC 2026)
+PASS   tb_mem_arbiter         PASS: arbiter properties hold in both scenarios
+PASS   tb_mem_subsystem       PASS: 3052 checks, 0 errors
+PASS   tb_mem_ecc             PASS: 3406 checks, 0 errors
+PASS   tb_scrubber            PASS: 3684 checks, 0 errors
+PASS   tb_mega                PASS: 5770 checks, 0 failures  (seed 1)
+PASS   tb_regs                PASS: 2586 checks, 0 failures  (seed 1)
+PASS   soc_memtest            RESULT PASS after 141221 cycles
+PASS   soc_ecc_demo           SYSTEM TEST PASS: firmware self-checks passed and the interrupt line behaved
+PASS   soc_csr_test           RESULT PASS after 4056 cycles
+PASS   soc_irq_stress         INTERRUPT TEST PASS (seed 1)
+PASS   soc_error_log          ERROR-LOG SYSTEM TEST PASS (seed 1)
+----
+passed: 11   failed: 0
+ALL TESTS PASS

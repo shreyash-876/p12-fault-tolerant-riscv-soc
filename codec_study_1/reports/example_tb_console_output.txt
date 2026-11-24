@@ -1,0 +1,338 @@
+WARNING: ../tb/tb_ecc_codec.sv:336: $readmemh(ecc_vectors.hex): Not enough words in the file for the requested range [0:65535].
+========================================================================
+tb_ecc_codec: 54204 golden-model vectors loaded
+  every vector = data word -> ENCODE -> INJECT error mask -> READ -> DECODE
+  encoders: IMPL 0 ref, 1 flat, 2 CSE, 3 tree
+  decoders: IMPL 0-3 (PIPE 0), IMPL 2 and 3 (PIPE 1)
+  detail shown for decoder IMPL 2, PIPE 0; log file: ecc_tb_log.txt
+========================================================================
+Vectors in the file, by kind (shown in phase A = up to 3 per kind):
+  clean (no error)                46 vectors
+  single error, data bit        1472 vectors
+  single error, check bit        322 vectors
+  double error, data+data      22816 vectors
+  double error, data+check     10304 vectors
+  double error, check+check      966 vectors
+  triple error                 18278 vectors
+
+########################  PHASE A: selected vectors, step by step  ########################
+
+=== vector #5467: clean (no error) =================================
+  INPUT   data to store      : 00000008
+  ENCODE  stored codeword    : 0d00000008   (check bits 0d)   encoders IMPL 0..3 vs golden: OK OK OK OK
+  INJECT  error mask         : 0000000000   flipped bits: none
+  READ    codeword read back : 0d00000008
+  DECODE  decoder IMPL 2, PIPE 0              RTL (DUT)                golden
+          syndrome (bin/hex): 0000000 / 00             0000000 / 00             ok
+          ce / ue           : 0 / 0                    0 / 0                    ok
+          err_pos           : 0                        0                        ok
+          data_out          : 00000008                 00000008                 ok
+          cw_out            : 0d00000008               0d00000008               ok
+  DECISION: no error detected: data passed through unchanged
+  data_out EQUALS the stored data   |   all 6 decoders vs golden: OK OK OK OK OK OK   => PASS
+
+=== vector #5489: single error, data bit =================================
+  INPUT   data to store      : 00000008
+  ENCODE  stored codeword    : 0d00000008   (check bits 0d)   encoders IMPL 0..3 vs golden: OK OK OK OK
+  INJECT  error mask         : 0000200000   flipped bits: d21
+  READ    codeword read back : 0d00200008
+  DECODE  decoder IMPL 2, PIPE 0              RTL (DUT)                golden
+          syndrome (bin/hex): 1010010 / 52             1010010 / 52             ok
+          ce / ue           : 1 / 0                    1 / 0                    ok
+          err_pos           : 21                       21                       ok
+          data_out          : 00000008                 00000008                 ok
+          cw_out            : 0d00000008               0d00000008               ok
+  DECISION: single error at d21 (codeword bit 21) corrected: syndrome equals that bit's column of H
+  data_out EQUALS the stored data   |   all 6 decoders vs golden: OK OK OK OK OK OK   => PASS
+
+=== vector #5504: single error, check bit =================================
+  INPUT   data to store      : 00000008
+  ENCODE  stored codeword    : 0d00000008   (check bits 0d)   encoders IMPL 0..3 vs golden: OK OK OK OK
+  INJECT  error mask         : 1000000000   flipped bits: c4
+  READ    codeword read back : 1d00000008
+  DECODE  decoder IMPL 2, PIPE 0              RTL (DUT)                golden
+          syndrome (bin/hex): 0010000 / 10             0010000 / 10             ok
+          ce / ue           : 1 / 0                    1 / 0                    ok
+          err_pos           : 36                       36                       ok
+          data_out          : 00000008                 00000008                 ok
+          cw_out            : 0d00000008               0d00000008               ok
+  DECISION: single error at c4 (codeword bit 36) corrected: syndrome equals that bit's column of H
+  data_out EQUALS the stored data   |   all 6 decoders vs golden: OK OK OK OK OK OK   => PASS
+
+=== vector #5928: double error, data+data =================================
+  INPUT   data to store      : 00000008
+  ENCODE  stored codeword    : 0d00000008   (check bits 0d)   encoders IMPL 0..3 vs golden: OK OK OK OK
+  INJECT  error mask         : 0000082000   flipped bits: d13 d19
+  READ    codeword read back : 0d00082008
+  DECODE  decoder IMPL 2, PIPE 0              RTL (DUT)                golden
+          syndrome (bin/hex): 1000100 / 44             1000100 / 44             ok
+          ce / ue           : 0 / 1                    0 / 1                    ok
+          err_pos           : 0                        0                        ok
+          data_out          : 00082008                 00082008                 ok
+          cw_out            : 0d00082008               0d00082008               ok
+  DECISION: even-weight syndrome => 2 errors: detected, NOT correctable, data left unchanged
+  data_out DIFFERS FROM the stored data   |   all 6 decoders vs golden: OK OK OK OK OK OK   => PASS
+
+=== vector #6107: double error, data+check =================================
+  INPUT   data to store      : 00000008
+  ENCODE  stored codeword    : 0d00000008   (check bits 0d)   encoders IMPL 0..3 vs golden: OK OK OK OK
+  INJECT  error mask         : 0400200000   flipped bits: d21 c2
+  READ    codeword read back : 0900200008
+  DECODE  decoder IMPL 2, PIPE 0              RTL (DUT)                golden
+          syndrome (bin/hex): 1010110 / 56             1010110 / 56             ok
+          ce / ue           : 0 / 1                    0 / 1                    ok
+          err_pos           : 0                        0                        ok
+          data_out          : 00200008                 00200008                 ok
+          cw_out            : 0900200008               0900200008               ok
+  DECISION: even-weight syndrome => 2 errors: detected, NOT correctable, data left unchanged
+  data_out DIFFERS FROM the stored data   |   all 6 decoders vs golden: OK OK OK OK OK OK   => PASS
+
+=== vector #6241: double error, check+check =================================
+  INPUT   data to store      : 00000008
+  ENCODE  stored codeword    : 0d00000008   (check bits 0d)   encoders IMPL 0..3 vs golden: OK OK OK OK
+  INJECT  error mask         : 4400000000   flipped bits: c2 c6
+  READ    codeword read back : 4900000008
+  DECODE  decoder IMPL 2, PIPE 0              RTL (DUT)                golden
+          syndrome (bin/hex): 1000100 / 44             1000100 / 44             ok
+          ce / ue           : 0 / 1                    0 / 1                    ok
+          err_pos           : 0                        0                        ok
+          data_out          : 00000008                 00000008                 ok
+          cw_out            : 4900000008               4900000008               ok
+  DECISION: even-weight syndrome => 2 errors: detected, NOT correctable, data left unchanged
+  data_out EQUALS the stored data   |   all 6 decoders vs golden: OK OK OK OK OK OK   => PASS
+
+=== vector #17182: clean (no error) =================================
+  INPUT   data to store      : 00040000
+  ENCODE  stored codeword    : 2a00040000   (check bits 2a)   encoders IMPL 0..3 vs golden: OK OK OK OK
+  INJECT  error mask         : 0000000000   flipped bits: none
+  READ    codeword read back : 2a00040000
+  DECODE  decoder IMPL 2, PIPE 0              RTL (DUT)                golden
+          syndrome (bin/hex): 0000000 / 00             0000000 / 00             ok
+          ce / ue           : 0 / 0                    0 / 0                    ok
+          err_pos           : 0                        0                        ok
+          data_out          : 00040000                 00040000                 ok
+          cw_out            : 2a00040000               2a00040000               ok
+  DECISION: no error detected: data passed through unchanged
+  data_out EQUALS the stored data   |   all 6 decoders vs golden: OK OK OK OK OK OK   => PASS
+
+=== vector #17214: single error, data bit =================================
+  INPUT   data to store      : 00040000
+  ENCODE  stored codeword    : 2a00040000   (check bits 2a)   encoders IMPL 0..3 vs golden: OK OK OK OK
+  INJECT  error mask         : 0080000000   flipped bits: d31
+  READ    codeword read back : 2a80040000
+  DECODE  decoder IMPL 2, PIPE 0              RTL (DUT)                golden
+          syndrome (bin/hex): 1101000 / 68             1101000 / 68             ok
+          ce / ue           : 1 / 0                    1 / 0                    ok
+          err_pos           : 31                       31                       ok
+          data_out          : 00040000                 00040000                 ok
+          cw_out            : 2a00040000               2a00040000               ok
+  DECISION: single error at d31 (codeword bit 31) corrected: syndrome equals that bit's column of H
+  data_out EQUALS the stored data   |   all 6 decoders vs golden: OK OK OK OK OK OK   => PASS
+
+=== vector #17221: single error, check bit =================================
+  INPUT   data to store      : 00040000
+  ENCODE  stored codeword    : 2a00040000   (check bits 2a)   encoders IMPL 0..3 vs golden: OK OK OK OK
+  INJECT  error mask         : 4000000000   flipped bits: c6
+  READ    codeword read back : 6a00040000
+  DECODE  decoder IMPL 2, PIPE 0              RTL (DUT)                golden
+          syndrome (bin/hex): 1000000 / 40             1000000 / 40             ok
+          ce / ue           : 1 / 0                    1 / 0                    ok
+          err_pos           : 38                       38                       ok
+          data_out          : 00040000                 00040000                 ok
+          cw_out            : 2a00040000               2a00040000               ok
+  DECISION: single error at c6 (codeword bit 38) corrected: syndrome equals that bit's column of H
+  data_out EQUALS the stored data   |   all 6 decoders vs golden: OK OK OK OK OK OK   => PASS
+
+=== vector #17927: double error, data+data =================================
+  INPUT   data to store      : 00040000
+  ENCODE  stored codeword    : 2a00040000   (check bits 2a)   encoders IMPL 0..3 vs golden: OK OK OK OK
+  INJECT  error mask         : 00c0000000   flipped bits: d30 d31
+  READ    codeword read back : 2ac0040000
+  DECODE  decoder IMPL 2, PIPE 0              RTL (DUT)                golden
+          syndrome (bin/hex): 0110000 / 30             0110000 / 30             ok
+          ce / ue           : 0 / 1                    0 / 1                    ok
+          err_pos           : 0                        0                        ok
+          data_out          : c0040000                 c0040000                 ok
+          cw_out            : 2ac0040000               2ac0040000               ok
+  DECISION: even-weight syndrome => 2 errors: detected, NOT correctable, data left unchanged
+  data_out DIFFERS FROM the stored data   |   all 6 decoders vs golden: OK OK OK OK OK OK   => PASS
+
+=== vector #17941: double error, data+check =================================
+  INPUT   data to store      : 00040000
+  ENCODE  stored codeword    : 2a00040000   (check bits 2a)   encoders IMPL 0..3 vs golden: OK OK OK OK
+  INJECT  error mask         : 4080000000   flipped bits: d31 c6
+  READ    codeword read back : 6a80040000
+  DECODE  decoder IMPL 2, PIPE 0              RTL (DUT)                golden
+          syndrome (bin/hex): 0101000 / 28             0101000 / 28             ok
+          ce / ue           : 0 / 1                    0 / 1                    ok
+          err_pos           : 0                        0                        ok
+          data_out          : 80040000                 80040000                 ok
+          cw_out            : 6a80040000               6a80040000               ok
+  DECISION: even-weight syndrome => 2 errors: detected, NOT correctable, data left unchanged
+  data_out DIFFERS FROM the stored data   |   all 6 decoders vs golden: OK OK OK OK OK OK   => PASS
+
+=== vector #18723: double error, check+check =================================
+  INPUT   data to store      : 00080000
+  ENCODE  stored codeword    : 4a00080000   (check bits 4a)   encoders IMPL 0..3 vs golden: OK OK OK OK
+  INJECT  error mask         : 0300000000   flipped bits: c0 c1
+  READ    codeword read back : 4900080000
+  DECODE  decoder IMPL 2, PIPE 0              RTL (DUT)                golden
+          syndrome (bin/hex): 0000011 / 03             0000011 / 03             ok
+          ce / ue           : 0 / 1                    0 / 1                    ok
+          err_pos           : 0                        0                        ok
+          data_out          : 00080000                 00080000                 ok
+          cw_out            : 4900080000               4900080000               ok
+  DECISION: even-weight syndrome => 2 errors: detected, NOT correctable, data left unchanged
+  data_out EQUALS the stored data   |   all 6 decoders vs golden: OK OK OK OK OK OK   => PASS
+
+=== vector #28897: clean (no error) =================================
+  INPUT   data to store      : 91b7584a
+  ENCODE  stored codeword    : 6791b7584a   (check bits 67)   encoders IMPL 0..3 vs golden: OK OK OK OK
+  INJECT  error mask         : 0000000000   flipped bits: none
+  READ    codeword read back : 6791b7584a
+  DECODE  decoder IMPL 2, PIPE 0              RTL (DUT)                golden
+          syndrome (bin/hex): 0000000 / 00             0000000 / 00             ok
+          ce / ue           : 0 / 0                    0 / 0                    ok
+          err_pos           : 0                        0                        ok
+          data_out          : 91b7584a                 91b7584a                 ok
+          cw_out            : 6791b7584a               6791b7584a               ok
+  DECISION: no error detected: data passed through unchanged
+  data_out EQUALS the stored data   |   all 6 decoders vs golden: OK OK OK OK OK OK   => PASS
+
+=== vector #29688: single error, data bit =================================
+  INPUT   data to store      : d8f16adf
+  ENCODE  stored codeword    : 6fd8f16adf   (check bits 6f)   encoders IMPL 0..3 vs golden: OK OK OK OK
+  INJECT  error mask         : 0000000200   flipped bits: d9
+  READ    codeword read back : 6fd8f168df
+  DECODE  decoder IMPL 2, PIPE 0              RTL (DUT)                golden
+          syndrome (bin/hex): 1001001 / 49             1001001 / 49             ok
+          ce / ue           : 1 / 0                    1 / 0                    ok
+          err_pos           : 9                        9                        ok
+          data_out          : d8f16adf                 d8f16adf                 ok
+          cw_out            : 6fd8f16adf               6fd8f16adf               ok
+  DECISION: single error at d9 (codeword bit 9) corrected: syndrome equals that bit's column of H
+  data_out EQUALS the stored data   |   all 6 decoders vs golden: OK OK OK OK OK OK   => PASS
+
+=== vector #29712: single error, check bit =================================
+  INPUT   data to store      : d8f16adf
+  ENCODE  stored codeword    : 6fd8f16adf   (check bits 6f)   encoders IMPL 0..3 vs golden: OK OK OK OK
+  INJECT  error mask         : 0200000000   flipped bits: c1
+  READ    codeword read back : 6dd8f16adf
+  DECODE  decoder IMPL 2, PIPE 0              RTL (DUT)                golden
+          syndrome (bin/hex): 0000010 / 02             0000010 / 02             ok
+          ce / ue           : 1 / 0                    1 / 0                    ok
+          err_pos           : 33                       33                       ok
+          data_out          : d8f16adf                 d8f16adf                 ok
+          cw_out            : 6fd8f16adf               6fd8f16adf               ok
+  DECISION: single error at c1 (codeword bit 33) corrected: syndrome equals that bit's column of H
+  data_out EQUALS the stored data   |   all 6 decoders vs golden: OK OK OK OK OK OK   => PASS
+
+=== vector #29917: double error, data+data =================================
+  INPUT   data to store      : d8f16adf
+  ENCODE  stored codeword    : 6fd8f16adf   (check bits 6f)   encoders IMPL 0..3 vs golden: OK OK OK OK
+  INJECT  error mask         : 0002000020   flipped bits: d5 d25
+  READ    codeword read back : 6fdaf16aff
+  DECODE  decoder IMPL 2, PIPE 0              RTL (DUT)                golden
+          syndrome (bin/hex): 1101001 / 69             1101001 / 69             ok
+          ce / ue           : 0 / 1                    0 / 1                    ok
+          err_pos           : 0                        0                        ok
+          data_out          : daf16aff                 daf16aff                 ok
+          cw_out            : 6fdaf16aff               6fdaf16aff               ok
+  DECISION: even-weight syndrome => 2 errors: detected, NOT correctable, data left unchanged
+  data_out DIFFERS FROM the stored data   |   all 6 decoders vs golden: OK OK OK OK OK OK   => PASS
+
+=== vector #30077: double error, data+check =================================
+  INPUT   data to store      : d8f16adf
+  ENCODE  stored codeword    : 6fd8f16adf   (check bits 6f)   encoders IMPL 0..3 vs golden: OK OK OK OK
+  INJECT  error mask         : 0800000400   flipped bits: d10 c3
+  READ    codeword read back : 67d8f16edf
+  DECODE  decoder IMPL 2, PIPE 0              RTL (DUT)                golden
+          syndrome (bin/hex): 0111001 / 39             0111001 / 39             ok
+          ce / ue           : 0 / 1                    0 / 1                    ok
+          err_pos           : 0                        0                        ok
+          data_out          : d8f16edf                 d8f16edf                 ok
+          cw_out            : 67d8f16edf               67d8f16edf               ok
+  DECISION: even-weight syndrome => 2 errors: detected, NOT correctable, data left unchanged
+  data_out DIFFERS FROM the stored data   |   all 6 decoders vs golden: OK OK OK OK OK OK   => PASS
+
+=== vector #30445: double error, check+check =================================
+  INPUT   data to store      : d8f16adf
+  ENCODE  stored codeword    : 6fd8f16adf   (check bits 6f)   encoders IMPL 0..3 vs golden: OK OK OK OK
+  INJECT  error mask         : 0a00000000   flipped bits: c1 c3
+  READ    codeword read back : 65d8f16adf
+  DECODE  decoder IMPL 2, PIPE 0              RTL (DUT)                golden
+          syndrome (bin/hex): 0001010 / 0a             0001010 / 0a             ok
+          ce / ue           : 0 / 1                    0 / 1                    ok
+          err_pos           : 0                        0                        ok
+          data_out          : d8f16adf                 d8f16adf                 ok
+          cw_out            : 65d8f16adf               65d8f16adf               ok
+  DECISION: even-weight syndrome => 2 errors: detected, NOT correctable, data left unchanged
+  data_out EQUALS the stored data   |   all 6 decoders vs golden: OK OK OK OK OK OK   => PASS
+
+=== vector #38972: triple error =================================
+  INPUT   data to store      : 00000000
+  ENCODE  stored codeword    : 0000000000   (check bits 00)   encoders IMPL 0..3 vs golden: OK OK OK OK
+  INJECT  error mask         : 0800800010   flipped bits: d4 d23 c3
+  READ    codeword read back : 0800800010
+  DECODE  decoder IMPL 2, PIPE 0              RTL (DUT)                golden
+          syndrome (bin/hex): 0000001 / 01             0000001 / 01             ok
+          ce / ue           : 1 / 0                    1 / 0                    ok
+          err_pos           : 32                       32                       ok
+          data_out          : 00800010                 00800010                 ok
+          cw_out            : 0900800010               0900800010               ok
+  DECISION: single error at c0 (codeword bit 32) corrected: syndrome equals that bit's column of H  ** MISCORRECTION: 3 errors were injected, decoder believes 1 **
+  data_out DIFFERS FROM the stored data   |   all 6 decoders vs golden: OK OK OK OK OK OK   => PASS
+
+=== vector #45064: triple error =================================
+  INPUT   data to store      : 00000000
+  ENCODE  stored codeword    : 0000000000   (check bits 00)   encoders IMPL 0..3 vs golden: OK OK OK OK
+  INJECT  error mask         : 7000000000   flipped bits: c4 c5 c6
+  READ    codeword read back : 7000000000
+  DECODE  decoder IMPL 2, PIPE 0              RTL (DUT)                golden
+          syndrome (bin/hex): 1110000 / 70             1110000 / 70             ok
+          ce / ue           : 0 / 1                    0 / 1                    ok
+          err_pos           : 0                        0                        ok
+          data_out          : 00000000                 00000000                 ok
+          cw_out            : 7000000000               7000000000               ok
+  DECISION: odd-weight syndrome matching no column => 3+ errors: detected, NOT correctable, data left unchanged
+  data_out EQUALS the stored data   |   all 6 decoders vs golden: OK OK OK OK OK OK   => PASS
+
+=== vector #51156: triple error =================================
+  INPUT   data to store      : 89abcdef
+  ENCODE  stored codeword    : 3689abcdef   (check bits 36)   encoders IMPL 0..3 vs golden: OK OK OK OK
+  INJECT  error mask         : 1000400800   flipped bits: d11 d22 c4
+  READ    codeword read back : 2689ebc5ef
+  DECODE  decoder IMPL 2, PIPE 0              RTL (DUT)                golden
+          syndrome (bin/hex): 0100011 / 23             0100011 / 23             ok
+          ce / ue           : 1 / 0                    1 / 0                    ok
+          err_pos           : 1                        1                        ok
+          data_out          : 89ebc5ed                 89ebc5ed                 ok
+          cw_out            : 2689ebc5ed               2689ebc5ed               ok
+  DECISION: single error at d1 (codeword bit 1) corrected: syndrome equals that bit's column of H  ** MISCORRECTION: 3 errors were injected, decoder believes 1 **
+  data_out DIFFERS FROM the stored data   |   all 6 decoders vs golden: OK OK OK OK OK OK   => PASS
+
+Phase A: 21 vectors applied one at a time, 210 checks.
+
+########################  PHASE B: all 54204 vectors streamed, one per clock  ###########
+  progress: 10000 / 54204 vectors
+  progress: 20000 / 54204 vectors
+  progress: 30000 / 54204 vectors
+  progress: 40000 / 54204 vectors
+  progress: 50000 / 54204 vectors
+
+------------------------------------------------------------------------
+  encoder IMPL 0          : 0 errors
+  encoder IMPL 1          : 0 errors
+  encoder IMPL 2          : 0 errors
+  encoder IMPL 3          : 0 errors
+  decoder IMPL 0 PIPE 0   : 0 errors
+  decoder IMPL 1 PIPE 0   : 0 errors
+  decoder IMPL 2 PIPE 0   : 0 errors
+  decoder IMPL 3 PIPE 0   : 0 errors
+  decoder IMPL 2 PIPE 1   : 0 errors
+  decoder IMPL 3 PIPE 1   : 0 errors
+------------------------------------------------------------------------
+  phase A 210 checks + phase B 542040 checks
+PASS: 542250 checks, 0 errors
+========================================================================
+../tb/tb_ecc_codec.sv:438: $finish called at 1084960000 (1ps)

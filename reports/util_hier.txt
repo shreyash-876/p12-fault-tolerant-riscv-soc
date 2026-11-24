@@ -1,0 +1,297 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
+| Date         : Mon Nov 23 19:08:56 2026
+| Host         : LAPTOP-631IK2QE running 64-bit major release  (build 9200)
+| Command      : report_utilization -hierarchical -file C:/Users/asus/Documents/RTL_project/p12_final/p12_final/reports/util_hier.txt
+| Design       : zybo_top
+| Device       : xc7z010clg400-1
+| Speed File   : -1
+| Design State : Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Utilization Design Information
+
+Table of Contents
+-----------------
+1. Utilization by Hierarchy
+
+1. Utilization by Hierarchy
+---------------------------
+
++-------------------------------------------------------------------------+-----------------------------------------------------+------------+------------+---------+------+-------+--------+--------+------------+
+|                                 Instance                                |                        Module                       | Total LUTs | Logic LUTs | LUTRAMs | SRLs |  FFs  | RAMB36 | RAMB18 | DSP Blocks |
++-------------------------------------------------------------------------+-----------------------------------------------------+------------+------------+---------+------+-------+--------+--------+------------+
+| zybo_top                                                                |                                               (top) |      11485 |       8330 |     196 | 2959 | 17445 |     26 |      1 |          0 |
+|   (zybo_top)                                                            |                                               (top) |          1 |          1 |       0 |    0 |     3 |      0 |      0 |          0 |
+|   dbg_hub                                                               |                                             dbg_hub |        449 |        425 |      24 |    0 |   741 |      0 |      0 |          0 |
+|     inst                                                                |                                  xsdbm_v3_0_5_xsdbm |        449 |        425 |      24 |    0 |   741 |      0 |      0 |          0 |
+|       BSCANID.u_xsdbm_id                                                |                               xsdbm_v3_0_5_xsdbm_id |        449 |        425 |      24 |    0 |   741 |      0 |      0 |          0 |
+|         SWITCH_N_EXT_BSCAN.bscan_switch                                 |                           xsdbm_v3_0_5_bscan_switch |        124 |        124 |       0 |    0 |   125 |      0 |      0 |          0 |
+|         CORE_XSDB.UUT_MASTER                                            |                              xsdbm_v3_0_5_icon2xsdb |        273 |        249 |      24 |    0 |   554 |      0 |      0 |          0 |
+|           U_ICON_INTERFACE                                              |                                     xsdbm_v3_0_5_if |        163 |        139 |      24 |    0 |   450 |      0 |      0 |          0 |
+|             U_CMD6_WR                                                   |                                  xsdbm_v3_0_5_wrreg |         46 |         34 |      12 |    0 |   110 |      0 |      0 |          0 |
+|               U_WR_FIFO                                                 |                                 xsdbm_v3_0_5_wrfifo |         44 |         32 |      12 |    0 |    90 |      0 |      0 |          0 |
+|                 SUBCORE_FIFO.xsdbm_v3_0_5_wrfifo_inst                   |                              fifo_generator_v13_1_5 |         42 |         30 |      12 |    0 |    90 |      0 |      0 |          0 |
+|                   inst_fifo_gen                                         |                        fifo_generator_v13_1_5_synth |         42 |         30 |      12 |    0 |    90 |      0 |      0 |          0 |
+|                     gconvfifo.rf                                        |                                  fifo_generator_top |         42 |         30 |      12 |    0 |    90 |      0 |      0 |          0 |
+|                       grf.rf                                            |                              fifo_generator_ramfifo |         42 |         30 |      12 |    0 |    90 |      0 |      0 |          0 |
+|             U_CMD4                                                      |                xsdbm_v3_0_5_ctl_reg__parameterized0 |          9 |          9 |       0 |    0 |    62 |      0 |      0 |          0 |
+|             U_CMD6_RD                                                   |                                  xsdbm_v3_0_5_rdreg |         67 |         55 |      12 |    0 |   134 |      0 |      0 |          0 |
+|               U_RD_FIFO                                                 |                                 xsdbm_v3_0_5_rdfifo |         65 |         53 |      12 |    0 |   114 |      0 |      0 |          0 |
+|                 SUBCORE_FIFO.xsdbm_v3_0_5_rdfifo_inst                   |              fifo_generator_v13_1_5__parameterized0 |         47 |         35 |      12 |    0 |   114 |      0 |      0 |          0 |
+|                   inst_fifo_gen                                         |        fifo_generator_v13_1_5_synth__parameterized0 |         47 |         35 |      12 |    0 |   114 |      0 |      0 |          0 |
+|                     gconvfifo.rf                                        |                  fifo_generator_top__parameterized0 |         47 |         35 |      12 |    0 |   114 |      0 |      0 |          0 |
+|                       grf.rf                                            |              fifo_generator_ramfifo__parameterized0 |         47 |         35 |      12 |    0 |   114 |      0 |      0 |          0 |
+|           U_XSDB_BUS_CONTROLLER                                         |                                xsdbm_v3_0_5_bus_ctl |         70 |         70 |       0 |    0 |    48 |      0 |      0 |          0 |
+|   u_ila_0                                                               |                                             u_ila_0 |       8279 |       5192 |     128 | 2959 | 14304 |     20 |      0 |          0 |
+|     inst                                                                |                             u_ila_0_ila_v6_2_19_ila |       8279 |       5192 |     128 | 2959 | 14304 |     20 |      0 |          0 |
+|       ila_core_inst                                                     |                        u_ila_0_ila_v6_2_19_ila_core |       8278 |       5191 |     128 | 2959 | 14298 |     20 |      0 |          0 |
+|         (ila_core_inst)                                                 |                        u_ila_0_ila_v6_2_19_ila_core |        176 |          0 |       0 |  176 |   394 |      0 |      0 |          0 |
+|         ADV_TRIG.u_adv_trig                                             |       u_ila_0_ila_v6_2_19_ila_adv_trigger_sequencer |        197 |         69 |     128 |    0 |    70 |      0 |      0 |          0 |
+|         COUNTER.u_count                                                 |                     u_ila_0_ila_v6_2_19_ila_counter |         78 |         74 |       0 |    4 |   136 |      0 |      0 |          0 |
+|         u_ila_cap_ctrl                                                  |             u_ila_0_ila_v6_2_19_ila_cap_ctrl_legacy |         84 |         37 |       0 |   47 |   137 |      0 |      0 |          0 |
+|           u_cap_addrgen                                                 |                 u_ila_0_ila_v6_2_19_ila_cap_addrgen |         64 |         27 |       0 |   37 |   131 |      0 |      0 |          0 |
+|             (u_cap_addrgen)                                             |                 u_ila_0_ila_v6_2_19_ila_cap_addrgen |          1 |          0 |       0 |    1 |    73 |      0 |      0 |          0 |
+|         u_ila_regs                                                      |                    u_ila_0_ila_v6_2_19_ila_register |       4684 |       4683 |       0 |    1 |  6699 |      0 |      0 |          0 |
+|           (u_ila_regs)                                                  |                    u_ila_0_ila_v6_2_19_ila_register |        966 |        965 |       0 |    1 |   208 |      0 |      0 |          0 |
+|           U_XSDB_SLAVE                                                  |                          u_ila_0_xsdbs_v1_0_5_xsdbs |         76 |         76 |       0 |    0 |   213 |      0 |      0 |          0 |
+|         u_trig                                                          |                     u_ila_0_ila_v6_2_19_ila_trigger |       2913 |        184 |       0 | 2729 |  6408 |      0 |      0 |          0 |
+|           U_TM                                                          |                  u_ila_0_ila_v6_2_19_ila_trig_match |       1156 |        176 |       0 |  980 |  3008 |      0 |      0 |          0 |
+|             (U_TM)                                                      |                  u_ila_0_ila_v6_2_19_ila_trig_match |        176 |        176 |       0 |    0 |     0 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[0].U_M                                     |       u_ila_0_ltlib_v1_0_3_match__parameterized0__1 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_404 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[10].U_M                                    |      u_ila_0_ltlib_v1_0_3_match__parameterized0__11 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_344 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[11].U_M                                    |      u_ila_0_ltlib_v1_0_3_match__parameterized0__12 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_338 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[12].U_M                                    |      u_ila_0_ltlib_v1_0_3_match__parameterized0__13 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_332 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[13].U_M                                    |      u_ila_0_ltlib_v1_0_3_match__parameterized0__14 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_326 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[14].U_M                                    |      u_ila_0_ltlib_v1_0_3_match__parameterized0__15 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_320 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[15].U_M                                    |      u_ila_0_ltlib_v1_0_3_match__parameterized0__16 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_314 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[16].U_M                                    |      u_ila_0_ltlib_v1_0_3_match__parameterized0__17 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_308 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[17].U_M                                    |      u_ila_0_ltlib_v1_0_3_match__parameterized0__18 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_302 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[18].U_M                                    |      u_ila_0_ltlib_v1_0_3_match__parameterized0__19 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_296 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[19].U_M                                    |      u_ila_0_ltlib_v1_0_3_match__parameterized0__20 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_290 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[1].U_M                                     |       u_ila_0_ltlib_v1_0_3_match__parameterized0__2 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_398 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[20].U_M                                    |      u_ila_0_ltlib_v1_0_3_match__parameterized0__21 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_284 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[21].U_M                                    |      u_ila_0_ltlib_v1_0_3_match__parameterized0__22 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_278 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[22].U_M                                    |      u_ila_0_ltlib_v1_0_3_match__parameterized0__23 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_272 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[23].U_M                                    |      u_ila_0_ltlib_v1_0_3_match__parameterized0__24 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_266 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[24].U_M                                    |      u_ila_0_ltlib_v1_0_3_match__parameterized0__25 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_260 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[25].U_M                                    |      u_ila_0_ltlib_v1_0_3_match__parameterized0__26 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_254 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[26].U_M                                    |      u_ila_0_ltlib_v1_0_3_match__parameterized0__27 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_248 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[27].U_M                                    |      u_ila_0_ltlib_v1_0_3_match__parameterized0__28 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_242 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[2].U_M                                     |       u_ila_0_ltlib_v1_0_3_match__parameterized0__3 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_392 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[32].U_M                                    |      u_ila_0_ltlib_v1_0_3_match__parameterized0__29 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_225 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[33].U_M                                    |      u_ila_0_ltlib_v1_0_3_match__parameterized0__30 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_219 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[34].U_M                                    |      u_ila_0_ltlib_v1_0_3_match__parameterized0__31 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_213 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[35].U_M                                    |      u_ila_0_ltlib_v1_0_3_match__parameterized0__32 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_207 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[3].U_M                                     |       u_ila_0_ltlib_v1_0_3_match__parameterized0__4 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_386 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[40].U_M                                    |      u_ila_0_ltlib_v1_0_3_match__parameterized0__33 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_189 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[41].U_M                                    |      u_ila_0_ltlib_v1_0_3_match__parameterized0__34 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_183 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[42].U_M                                    |      u_ila_0_ltlib_v1_0_3_match__parameterized0__35 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_177 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[43].U_M                                    |      u_ila_0_ltlib_v1_0_3_match__parameterized0__36 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_171 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[4].U_M                                     |       u_ila_0_ltlib_v1_0_3_match__parameterized0__5 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_380 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[52].U_M                                    |      u_ila_0_ltlib_v1_0_3_match__parameterized0__37 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_143 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[53].U_M                                    |      u_ila_0_ltlib_v1_0_3_match__parameterized0__38 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_137 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[54].U_M                                    |      u_ila_0_ltlib_v1_0_3_match__parameterized0__39 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_131 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[55].U_M                                    |          u_ila_0_ltlib_v1_0_3_match__parameterized0 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) |     u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[5].U_M                                     |       u_ila_0_ltlib_v1_0_3_match__parameterized0__6 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_374 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[6].U_M                                     |       u_ila_0_ltlib_v1_0_3_match__parameterized0__7 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_368 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[7].U_M                                     |       u_ila_0_ltlib_v1_0_3_match__parameterized0__8 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_362 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[8].U_M                                     |       u_ila_0_ltlib_v1_0_3_match__parameterized0__9 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_356 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|             N_DDR_MODE.G_NMU[9].U_M                                     |      u_ila_0_ltlib_v1_0_3_match__parameterized0__10 |         17 |          0 |       0 |   17 |    66 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) | u_ila_0_ltlib_v1_0_3_allx_typeA__parameterized0_350 |          0 |          0 |       0 |    0 |    64 |      0 |      0 |          0 |
+|           N_DDR_TC.N_DDR_TC_INST[0].U_TC                                |                       u_ila_0_ltlib_v1_0_3_match__1 |         53 |          0 |       0 |   53 |   102 |      0 |      0 |          0 |
+|             allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst     |                 u_ila_0_ltlib_v1_0_3_allx_typeA_888 |         53 |          0 |       0 |   53 |   101 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) |                 u_ila_0_ltlib_v1_0_3_allx_typeA_888 |          0 |          0 |       0 |    0 |   100 |      0 |      0 |          0 |
+|               DUT                                                       |                  u_ila_0_ltlib_v1_0_3_all_typeA_889 |         53 |          0 |       0 |   53 |     1 |      0 |      0 |          0 |
+|           N_DDR_TC.N_DDR_TC_INST[10].U_TC                               |                      u_ila_0_ltlib_v1_0_3_match__11 |         53 |          0 |       0 |   53 |   102 |      0 |      0 |          0 |
+|             allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst     |                 u_ila_0_ltlib_v1_0_3_allx_typeA_738 |         53 |          0 |       0 |   53 |   101 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) |                 u_ila_0_ltlib_v1_0_3_allx_typeA_738 |          0 |          0 |       0 |    0 |   100 |      0 |      0 |          0 |
+|               DUT                                                       |                  u_ila_0_ltlib_v1_0_3_all_typeA_739 |         53 |          0 |       0 |   53 |     1 |      0 |      0 |          0 |
+|           N_DDR_TC.N_DDR_TC_INST[11].U_TC                               |                      u_ila_0_ltlib_v1_0_3_match__12 |         53 |          0 |       0 |   53 |   102 |      0 |      0 |          0 |
+|             allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst     |                 u_ila_0_ltlib_v1_0_3_allx_typeA_723 |         53 |          0 |       0 |   53 |   101 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) |                 u_ila_0_ltlib_v1_0_3_allx_typeA_723 |          0 |          0 |       0 |    0 |   100 |      0 |      0 |          0 |
+|               DUT                                                       |                  u_ila_0_ltlib_v1_0_3_all_typeA_724 |         53 |          0 |       0 |   53 |     1 |      0 |      0 |          0 |
+|           N_DDR_TC.N_DDR_TC_INST[12].U_TC                               |                      u_ila_0_ltlib_v1_0_3_match__13 |         53 |          0 |       0 |   53 |   102 |      0 |      0 |          0 |
+|             allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst     |                 u_ila_0_ltlib_v1_0_3_allx_typeA_708 |         53 |          0 |       0 |   53 |   101 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) |                 u_ila_0_ltlib_v1_0_3_allx_typeA_708 |          0 |          0 |       0 |    0 |   100 |      0 |      0 |          0 |
+|               DUT                                                       |                  u_ila_0_ltlib_v1_0_3_all_typeA_709 |         53 |          0 |       0 |   53 |     1 |      0 |      0 |          0 |
+|           N_DDR_TC.N_DDR_TC_INST[13].U_TC                               |                      u_ila_0_ltlib_v1_0_3_match__14 |         53 |          0 |       0 |   53 |   102 |      0 |      0 |          0 |
+|             allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst     |                 u_ila_0_ltlib_v1_0_3_allx_typeA_693 |         53 |          0 |       0 |   53 |   101 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) |                 u_ila_0_ltlib_v1_0_3_allx_typeA_693 |          0 |          0 |       0 |    0 |   100 |      0 |      0 |          0 |
+|               DUT                                                       |                  u_ila_0_ltlib_v1_0_3_all_typeA_694 |         53 |          0 |       0 |   53 |     1 |      0 |      0 |          0 |
+|           N_DDR_TC.N_DDR_TC_INST[14].U_TC                               |                      u_ila_0_ltlib_v1_0_3_match__15 |         53 |          0 |       0 |   53 |   102 |      0 |      0 |          0 |
+|             allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst     |                 u_ila_0_ltlib_v1_0_3_allx_typeA_678 |         53 |          0 |       0 |   53 |   101 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) |                 u_ila_0_ltlib_v1_0_3_allx_typeA_678 |          0 |          0 |       0 |    0 |   100 |      0 |      0 |          0 |
+|               DUT                                                       |                  u_ila_0_ltlib_v1_0_3_all_typeA_679 |         53 |          0 |       0 |   53 |     1 |      0 |      0 |          0 |
+|           N_DDR_TC.N_DDR_TC_INST[15].U_TC                               |                      u_ila_0_ltlib_v1_0_3_match__16 |         53 |          0 |       0 |   53 |   102 |      0 |      0 |          0 |
+|             allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst     |                 u_ila_0_ltlib_v1_0_3_allx_typeA_663 |         53 |          0 |       0 |   53 |   101 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) |                 u_ila_0_ltlib_v1_0_3_allx_typeA_663 |          0 |          0 |       0 |    0 |   100 |      0 |      0 |          0 |
+|               DUT                                                       |                  u_ila_0_ltlib_v1_0_3_all_typeA_664 |         53 |          0 |       0 |   53 |     1 |      0 |      0 |          0 |
+|           N_DDR_TC.N_DDR_TC_INST[16].U_TC                               |                      u_ila_0_ltlib_v1_0_3_match__17 |         53 |          0 |       0 |   53 |   102 |      0 |      0 |          0 |
+|             allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst     |                 u_ila_0_ltlib_v1_0_3_allx_typeA_648 |         53 |          0 |       0 |   53 |   101 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) |                 u_ila_0_ltlib_v1_0_3_allx_typeA_648 |          0 |          0 |       0 |    0 |   100 |      0 |      0 |          0 |
+|               DUT                                                       |                  u_ila_0_ltlib_v1_0_3_all_typeA_649 |         53 |          0 |       0 |   53 |     1 |      0 |      0 |          0 |
+|           N_DDR_TC.N_DDR_TC_INST[17].U_TC                               |                      u_ila_0_ltlib_v1_0_3_match__18 |         53 |          0 |       0 |   53 |   102 |      0 |      0 |          0 |
+|             allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst     |                 u_ila_0_ltlib_v1_0_3_allx_typeA_633 |         53 |          0 |       0 |   53 |   101 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) |                 u_ila_0_ltlib_v1_0_3_allx_typeA_633 |          0 |          0 |       0 |    0 |   100 |      0 |      0 |          0 |
+|               DUT                                                       |                  u_ila_0_ltlib_v1_0_3_all_typeA_634 |         53 |          0 |       0 |   53 |     1 |      0 |      0 |          0 |
+|           N_DDR_TC.N_DDR_TC_INST[18].U_TC                               |                      u_ila_0_ltlib_v1_0_3_match__19 |         53 |          0 |       0 |   53 |   102 |      0 |      0 |          0 |
+|             allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst     |                 u_ila_0_ltlib_v1_0_3_allx_typeA_618 |         53 |          0 |       0 |   53 |   101 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) |                 u_ila_0_ltlib_v1_0_3_allx_typeA_618 |          0 |          0 |       0 |    0 |   100 |      0 |      0 |          0 |
+|               DUT                                                       |                  u_ila_0_ltlib_v1_0_3_all_typeA_619 |         53 |          0 |       0 |   53 |     1 |      0 |      0 |          0 |
+|           N_DDR_TC.N_DDR_TC_INST[19].U_TC                               |                      u_ila_0_ltlib_v1_0_3_match__20 |         53 |          0 |       0 |   53 |   102 |      0 |      0 |          0 |
+|             allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst     |                 u_ila_0_ltlib_v1_0_3_allx_typeA_603 |         53 |          0 |       0 |   53 |   101 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) |                 u_ila_0_ltlib_v1_0_3_allx_typeA_603 |          0 |          0 |       0 |    0 |   100 |      0 |      0 |          0 |
+|               DUT                                                       |                  u_ila_0_ltlib_v1_0_3_all_typeA_604 |         53 |          0 |       0 |   53 |     1 |      0 |      0 |          0 |
+|           N_DDR_TC.N_DDR_TC_INST[1].U_TC                                |                       u_ila_0_ltlib_v1_0_3_match__2 |         53 |          0 |       0 |   53 |   102 |      0 |      0 |          0 |
+|             allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst     |                 u_ila_0_ltlib_v1_0_3_allx_typeA_873 |         53 |          0 |       0 |   53 |   101 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) |                 u_ila_0_ltlib_v1_0_3_allx_typeA_873 |          0 |          0 |       0 |    0 |   100 |      0 |      0 |          0 |
+|               DUT                                                       |                  u_ila_0_ltlib_v1_0_3_all_typeA_874 |         53 |          0 |       0 |   53 |     1 |      0 |      0 |          0 |
+|           N_DDR_TC.N_DDR_TC_INST[20].U_TC                               |                      u_ila_0_ltlib_v1_0_3_match__21 |         53 |          0 |       0 |   53 |   102 |      0 |      0 |          0 |
+|             allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst     |                 u_ila_0_ltlib_v1_0_3_allx_typeA_588 |         53 |          0 |       0 |   53 |   101 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) |                 u_ila_0_ltlib_v1_0_3_allx_typeA_588 |          0 |          0 |       0 |    0 |   100 |      0 |      0 |          0 |
+|               DUT                                                       |                  u_ila_0_ltlib_v1_0_3_all_typeA_589 |         53 |          0 |       0 |   53 |     1 |      0 |      0 |          0 |
+|           N_DDR_TC.N_DDR_TC_INST[21].U_TC                               |                      u_ila_0_ltlib_v1_0_3_match__22 |         53 |          0 |       0 |   53 |   102 |      0 |      0 |          0 |
+|             allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst     |                 u_ila_0_ltlib_v1_0_3_allx_typeA_573 |         53 |          0 |       0 |   53 |   101 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) |                 u_ila_0_ltlib_v1_0_3_allx_typeA_573 |          0 |          0 |       0 |    0 |   100 |      0 |      0 |          0 |
+|               DUT                                                       |                  u_ila_0_ltlib_v1_0_3_all_typeA_574 |         53 |          0 |       0 |   53 |     1 |      0 |      0 |          0 |
+|           N_DDR_TC.N_DDR_TC_INST[22].U_TC                               |                      u_ila_0_ltlib_v1_0_3_match__23 |         53 |          0 |       0 |   53 |   102 |      0 |      0 |          0 |
+|             allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst     |                 u_ila_0_ltlib_v1_0_3_allx_typeA_558 |         53 |          0 |       0 |   53 |   101 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) |                 u_ila_0_ltlib_v1_0_3_allx_typeA_558 |          0 |          0 |       0 |    0 |   100 |      0 |      0 |          0 |
+|               DUT                                                       |                  u_ila_0_ltlib_v1_0_3_all_typeA_559 |         53 |          0 |       0 |   53 |     1 |      0 |      0 |          0 |
+|           N_DDR_TC.N_DDR_TC_INST[23].U_TC                               |                      u_ila_0_ltlib_v1_0_3_match__24 |         53 |          0 |       0 |   53 |   102 |      0 |      0 |          0 |
+|             allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst     |                 u_ila_0_ltlib_v1_0_3_allx_typeA_543 |         53 |          0 |       0 |   53 |   101 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) |                 u_ila_0_ltlib_v1_0_3_allx_typeA_543 |          0 |          0 |       0 |    0 |   100 |      0 |      0 |          0 |
+|               DUT                                                       |                  u_ila_0_ltlib_v1_0_3_all_typeA_544 |         53 |          0 |       0 |   53 |     1 |      0 |      0 |          0 |
+|           N_DDR_TC.N_DDR_TC_INST[24].U_TC                               |                      u_ila_0_ltlib_v1_0_3_match__25 |         53 |          0 |       0 |   53 |   102 |      0 |      0 |          0 |
+|             allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst     |                 u_ila_0_ltlib_v1_0_3_allx_typeA_528 |         53 |          0 |       0 |   53 |   101 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) |                 u_ila_0_ltlib_v1_0_3_allx_typeA_528 |          0 |          0 |       0 |    0 |   100 |      0 |      0 |          0 |
+|               DUT                                                       |                  u_ila_0_ltlib_v1_0_3_all_typeA_529 |         53 |          0 |       0 |   53 |     1 |      0 |      0 |          0 |
+|           N_DDR_TC.N_DDR_TC_INST[25].U_TC                               |                      u_ila_0_ltlib_v1_0_3_match__26 |         53 |          0 |       0 |   53 |   102 |      0 |      0 |          0 |
+|             allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst     |                 u_ila_0_ltlib_v1_0_3_allx_typeA_513 |         53 |          0 |       0 |   53 |   101 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) |                 u_ila_0_ltlib_v1_0_3_allx_typeA_513 |          0 |          0 |       0 |    0 |   100 |      0 |      0 |          0 |
+|               DUT                                                       |                  u_ila_0_ltlib_v1_0_3_all_typeA_514 |         53 |          0 |       0 |   53 |     1 |      0 |      0 |          0 |
+|           N_DDR_TC.N_DDR_TC_INST[26].U_TC                               |                      u_ila_0_ltlib_v1_0_3_match__27 |         53 |          0 |       0 |   53 |   102 |      0 |      0 |          0 |
+|             allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst     |                 u_ila_0_ltlib_v1_0_3_allx_typeA_498 |         53 |          0 |       0 |   53 |   101 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) |                 u_ila_0_ltlib_v1_0_3_allx_typeA_498 |          0 |          0 |       0 |    0 |   100 |      0 |      0 |          0 |
+|               DUT                                                       |                  u_ila_0_ltlib_v1_0_3_all_typeA_499 |         53 |          0 |       0 |   53 |     1 |      0 |      0 |          0 |
+|           N_DDR_TC.N_DDR_TC_INST[27].U_TC                               |                      u_ila_0_ltlib_v1_0_3_match__28 |         53 |          0 |       0 |   53 |   102 |      0 |      0 |          0 |
+|             allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst     |                 u_ila_0_ltlib_v1_0_3_allx_typeA_483 |         53 |          0 |       0 |   53 |   101 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) |                 u_ila_0_ltlib_v1_0_3_allx_typeA_483 |          0 |          0 |       0 |    0 |   100 |      0 |      0 |          0 |
+|               DUT                                                       |                  u_ila_0_ltlib_v1_0_3_all_typeA_484 |         53 |          0 |       0 |   53 |     1 |      0 |      0 |          0 |
+|           N_DDR_TC.N_DDR_TC_INST[28].U_TC                               |                      u_ila_0_ltlib_v1_0_3_match__29 |         53 |          0 |       0 |   53 |   102 |      0 |      0 |          0 |
+|             allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst     |                 u_ila_0_ltlib_v1_0_3_allx_typeA_468 |         53 |          0 |       0 |   53 |   101 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) |                 u_ila_0_ltlib_v1_0_3_allx_typeA_468 |          0 |          0 |       0 |    0 |   100 |      0 |      0 |          0 |
+|               DUT                                                       |                  u_ila_0_ltlib_v1_0_3_all_typeA_469 |         53 |          0 |       0 |   53 |     1 |      0 |      0 |          0 |
+|           N_DDR_TC.N_DDR_TC_INST[29].U_TC                               |                      u_ila_0_ltlib_v1_0_3_match__30 |         53 |          0 |       0 |   53 |   102 |      0 |      0 |          0 |
+|             allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst     |                 u_ila_0_ltlib_v1_0_3_allx_typeA_453 |         53 |          0 |       0 |   53 |   101 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) |                 u_ila_0_ltlib_v1_0_3_allx_typeA_453 |          0 |          0 |       0 |    0 |   100 |      0 |      0 |          0 |
+|               DUT                                                       |                  u_ila_0_ltlib_v1_0_3_all_typeA_454 |         53 |          0 |       0 |   53 |     1 |      0 |      0 |          0 |
+|           N_DDR_TC.N_DDR_TC_INST[2].U_TC                                |                       u_ila_0_ltlib_v1_0_3_match__3 |         53 |          0 |       0 |   53 |   102 |      0 |      0 |          0 |
+|             allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst     |                 u_ila_0_ltlib_v1_0_3_allx_typeA_858 |         53 |          0 |       0 |   53 |   101 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) |                 u_ila_0_ltlib_v1_0_3_allx_typeA_858 |          0 |          0 |       0 |    0 |   100 |      0 |      0 |          0 |
+|               DUT                                                       |                  u_ila_0_ltlib_v1_0_3_all_typeA_859 |         53 |          0 |       0 |   53 |     1 |      0 |      0 |          0 |
+|           N_DDR_TC.N_DDR_TC_INST[30].U_TC                               |                      u_ila_0_ltlib_v1_0_3_match__31 |         53 |          0 |       0 |   53 |   102 |      0 |      0 |          0 |
+|             allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst     |                 u_ila_0_ltlib_v1_0_3_allx_typeA_438 |         53 |          0 |       0 |   53 |   101 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) |                 u_ila_0_ltlib_v1_0_3_allx_typeA_438 |          0 |          0 |       0 |    0 |   100 |      0 |      0 |          0 |
+|               DUT                                                       |                  u_ila_0_ltlib_v1_0_3_all_typeA_439 |         53 |          0 |       0 |   53 |     1 |      0 |      0 |          0 |
+|           N_DDR_TC.N_DDR_TC_INST[31].U_TC                               |                      u_ila_0_ltlib_v1_0_3_match__32 |         53 |          0 |       0 |   53 |   102 |      0 |      0 |          0 |
+|             allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst     |                 u_ila_0_ltlib_v1_0_3_allx_typeA_423 |         53 |          0 |       0 |   53 |   101 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) |                 u_ila_0_ltlib_v1_0_3_allx_typeA_423 |          0 |          0 |       0 |    0 |   100 |      0 |      0 |          0 |
+|               DUT                                                       |                  u_ila_0_ltlib_v1_0_3_all_typeA_424 |         53 |          0 |       0 |   53 |     1 |      0 |      0 |          0 |
+|           N_DDR_TC.N_DDR_TC_INST[3].U_TC                                |                       u_ila_0_ltlib_v1_0_3_match__4 |         53 |          0 |       0 |   53 |   102 |      0 |      0 |          0 |
+|             allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst     |                 u_ila_0_ltlib_v1_0_3_allx_typeA_843 |         53 |          0 |       0 |   53 |   101 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) |                 u_ila_0_ltlib_v1_0_3_allx_typeA_843 |          0 |          0 |       0 |    0 |   100 |      0 |      0 |          0 |
+|               DUT                                                       |                  u_ila_0_ltlib_v1_0_3_all_typeA_844 |         53 |          0 |       0 |   53 |     1 |      0 |      0 |          0 |
+|           N_DDR_TC.N_DDR_TC_INST[4].U_TC                                |                       u_ila_0_ltlib_v1_0_3_match__5 |         53 |          0 |       0 |   53 |   102 |      0 |      0 |          0 |
+|             allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst     |                 u_ila_0_ltlib_v1_0_3_allx_typeA_828 |         53 |          0 |       0 |   53 |   101 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) |                 u_ila_0_ltlib_v1_0_3_allx_typeA_828 |          0 |          0 |       0 |    0 |   100 |      0 |      0 |          0 |
+|               DUT                                                       |                  u_ila_0_ltlib_v1_0_3_all_typeA_829 |         53 |          0 |       0 |   53 |     1 |      0 |      0 |          0 |
+|           N_DDR_TC.N_DDR_TC_INST[5].U_TC                                |                       u_ila_0_ltlib_v1_0_3_match__6 |         53 |          0 |       0 |   53 |   102 |      0 |      0 |          0 |
+|             allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst     |                 u_ila_0_ltlib_v1_0_3_allx_typeA_813 |         53 |          0 |       0 |   53 |   101 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) |                 u_ila_0_ltlib_v1_0_3_allx_typeA_813 |          0 |          0 |       0 |    0 |   100 |      0 |      0 |          0 |
+|               DUT                                                       |                  u_ila_0_ltlib_v1_0_3_all_typeA_814 |         53 |          0 |       0 |   53 |     1 |      0 |      0 |          0 |
+|           N_DDR_TC.N_DDR_TC_INST[6].U_TC                                |                       u_ila_0_ltlib_v1_0_3_match__7 |         53 |          0 |       0 |   53 |   102 |      0 |      0 |          0 |
+|             allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst     |                 u_ila_0_ltlib_v1_0_3_allx_typeA_798 |         53 |          0 |       0 |   53 |   101 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) |                 u_ila_0_ltlib_v1_0_3_allx_typeA_798 |          0 |          0 |       0 |    0 |   100 |      0 |      0 |          0 |
+|               DUT                                                       |                  u_ila_0_ltlib_v1_0_3_all_typeA_799 |         53 |          0 |       0 |   53 |     1 |      0 |      0 |          0 |
+|           N_DDR_TC.N_DDR_TC_INST[7].U_TC                                |                       u_ila_0_ltlib_v1_0_3_match__8 |         53 |          0 |       0 |   53 |   102 |      0 |      0 |          0 |
+|             allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst     |                 u_ila_0_ltlib_v1_0_3_allx_typeA_783 |         53 |          0 |       0 |   53 |   101 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) |                 u_ila_0_ltlib_v1_0_3_allx_typeA_783 |          0 |          0 |       0 |    0 |   100 |      0 |      0 |          0 |
+|               DUT                                                       |                  u_ila_0_ltlib_v1_0_3_all_typeA_784 |         53 |          0 |       0 |   53 |     1 |      0 |      0 |          0 |
+|           N_DDR_TC.N_DDR_TC_INST[8].U_TC                                |                       u_ila_0_ltlib_v1_0_3_match__9 |         53 |          0 |       0 |   53 |   102 |      0 |      0 |          0 |
+|             allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst     |                 u_ila_0_ltlib_v1_0_3_allx_typeA_768 |         53 |          0 |       0 |   53 |   101 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) |                 u_ila_0_ltlib_v1_0_3_allx_typeA_768 |          0 |          0 |       0 |    0 |   100 |      0 |      0 |          0 |
+|               DUT                                                       |                  u_ila_0_ltlib_v1_0_3_all_typeA_769 |         53 |          0 |       0 |   53 |     1 |      0 |      0 |          0 |
+|           N_DDR_TC.N_DDR_TC_INST[9].U_TC                                |                      u_ila_0_ltlib_v1_0_3_match__10 |         53 |          0 |       0 |   53 |   102 |      0 |      0 |          0 |
+|             allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst     |                 u_ila_0_ltlib_v1_0_3_allx_typeA_753 |         53 |          0 |       0 |   53 |   101 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) |                 u_ila_0_ltlib_v1_0_3_allx_typeA_753 |          0 |          0 |       0 |    0 |   100 |      0 |      0 |          0 |
+|               DUT                                                       |                  u_ila_0_ltlib_v1_0_3_all_typeA_754 |         53 |          0 |       0 |   53 |     1 |      0 |      0 |          0 |
+|           STRG_QUAL.U_STRG_QUAL                                         |                          u_ila_0_ltlib_v1_0_3_match |         53 |          0 |       0 |   53 |   102 |      0 |      0 |          0 |
+|             allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst     |                     u_ila_0_ltlib_v1_0_3_allx_typeA |         53 |          0 |       0 |   53 |   101 |      0 |      0 |          0 |
+|               (allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst) |                     u_ila_0_ltlib_v1_0_3_allx_typeA |          0 |          0 |       0 |    0 |   100 |      0 |      0 |          0 |
+|               DUT                                                       |                      u_ila_0_ltlib_v1_0_3_all_typeA |         53 |          0 |       0 |   53 |     1 |      0 |      0 |          0 |
+|         xsdb_memory_read_inst                                           |                  u_ila_0_ltlib_v1_0_3_generic_memrd |        134 |        132 |       0 |    2 |   378 |      0 |      0 |          0 |
+|   u_soc                                                                 |                                             soc_top |       2756 |       2712 |      44 |    0 |  2397 |      6 |      1 |          0 |
+|     u_core                                                              |                                          rv32i_core |       1477 |       1433 |      44 |    0 |   710 |      0 |      0 |          0 |
+|       (u_core)                                                          |                                          rv32i_core |        213 |        213 |       0 |    0 |   214 |      0 |      0 |          0 |
+|       csr                                                               |                                            csr_unit |        236 |        236 |       0 |    0 |   159 |      0 |      0 |          0 |
+|       ex_unit                                                           |                                       execute_stage |        799 |        799 |       0 |    0 |   109 |      0 |      0 |          0 |
+|       id_stage                                                          |                                        decode_stage |         71 |         71 |       0 |    0 |   163 |      0 |      0 |          0 |
+|       if_stage                                                          |                                         fetch_stage |         34 |         34 |       0 |    0 |    65 |      0 |      0 |          0 |
+|       register_file                                                     |                                      regfile_ram32m |        116 |         72 |      44 |    0 |     0 |      0 |      0 |          0 |
+|     u_dec                                                               |                                        axil_decoder |        122 |        122 |       0 |    0 |    16 |      0 |      0 |          0 |
+|     u_fe_itcm                                                           |                                    axil_frontend__5 |         26 |         26 |       0 |    0 |    63 |      0 |      0 |          0 |
+|     u_mem                                                               |                                       mem_subsystem |        995 |        995 |       0 |    0 |  1466 |      2 |      1 |          0 |
+|       u_scrub                                                           |                                        ecc_scrubber |         48 |         48 |       0 |    0 |   142 |      0 |      0 |          0 |
+|       u_arb                                                             |                                         mem_arbiter |         82 |         82 |       0 |    0 |    36 |      0 |      0 |          0 |
+|       u_ctrl                                                            |                                        mem_ctrl_ecc |        214 |        214 |       0 |    0 |   234 |      0 |      0 |          0 |
+|         (u_ctrl)                                                        |                                        mem_ctrl_ecc |        177 |        177 |       0 |    0 |   234 |      0 |      0 |          0 |
+|       u_fe_mem                                                          |                                    axil_frontend__3 |         50 |         50 |       0 |    0 |   139 |      0 |      0 |          0 |
+|       u_fe_reg                                                          |                                     axil_frontend_1 |         22 |         22 |       0 |    0 |    87 |      0 |      0 |          0 |
+|       u_inj                                                             |                                        ecc_injector |        153 |        153 |       0 |    0 |   136 |      0 |      0 |          0 |
+|       u_regs                                                            |                                            ecc_regs |        428 |        428 |       0 |    0 |   692 |      0 |      0 |          0 |
++-------------------------------------------------------------------------+-----------------------------------------------------+------------+------------+---------+------+-------+--------+--------+------------+
+* Note: The sum of lower-level cells may be larger than their parent cells total, due to cross-hierarchy LUT combining
+
+

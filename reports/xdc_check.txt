@@ -1,0 +1,15 @@
+Pin check against Digilent's Zybo-Z7-Master.xdc (github.com/Digilent/digilent-xdc), checked in simulation session:
+  sysclk     pin K17  LVCMOS33  master: sysclk
+  sw[0       pin G15  LVCMOS33  master: sw[0
+  sw[1       pin P15  LVCMOS33  master: sw[1
+  sw[2       pin W13  LVCMOS33  master: sw[2
+  sw[3       pin T16  LVCMOS33  master: sw[3
+  btn[0      pin K18  LVCMOS33  master: btn[0
+  btn[1      pin P16  LVCMOS33  master: btn[1
+  btn[2      pin K19  LVCMOS33  master: btn[2
+  btn[3      pin Y16  LVCMOS33  master: btn[3
+  led[0      pin M14  LVCMOS33  master: led[0
+  led[1      pin M15  LVCMOS33  master: led[1
+  led[2      pin G14  LVCMOS33  master: led[2
+  led[3      pin D18  LVCMOS33  master: led[3
+  uart_tx    pin V12  LVCMOS33  master: je[0
