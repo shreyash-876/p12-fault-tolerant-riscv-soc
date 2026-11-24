@@ -8,7 +8,9 @@
 #
 # Same method as ooc_sweep.tcl: all ports registered, clock constrained at 5 ns, then
 #   fmax = 1000 / (5 - WNS),   slack at 50 MHz = 20 - (5 - WNS).
-# Columns: cfg, luts, ffs, logic_levels, path_ns, wns_ns, fmax_mhz, slack50_ns
+# Columns: cfg, luts, ffs, logic_levels, path_ns, wns_ns, fmax_mhz, slack50_ns, srls
+#   srls = shift-register primitives (SRL16E/SRLC32E): Vivado turns long delay chains into these; they are
+#          counted in neither the LUT nor the FF column. reports/util_xl_cfgN.txt has the exact LUT-as-shift-register numbers.
 # -----------------------------------------------------------------------------
 set root   [file normalize [file dirname [info script]]/..]
 set part   xc7z010clg400-1
@@ -18,7 +20,7 @@ set ncfg   7
 
 file mkdir $root/reports
 set csv [open $root/reports/ooc_results_xl.csv w]
-puts $csv "cfg,luts,ffs,logic_levels,path_ns,wns_ns,fmax_mhz,slack50_ns"
+puts $csv "cfg,luts,ffs,logic_levels,path_ns,wns_ns,fmax_mhz,slack50_ns,srls"
 
 for {set cfg 0} {$cfg < $ncfg} {incr cfg} {
     catch {close_project}
@@ -34,16 +36,18 @@ for {set cfg 0} {$cfg < $ncfg} {incr cfg} {
 
     set luts [llength [get_cells -hier -filter {REF_NAME =~ LUT*}]]
     set ffs  [llength [get_cells -hier -filter {REF_NAME =~ FD*}]]
+    set srls [llength [get_cells -hier -filter {REF_NAME =~ SRL*}]]
     set path [get_timing_paths -max_paths 1 -nworst 1 -setup]
     set wns  [get_property SLACK $path]
     set lvl  [get_property LOGIC_LEVELS $path]
     set dly  [get_property DATAPATH_DELAY $path]
     set fmax [format %.1f [expr {1000.0 / ($period - $wns)}]]
     set s50  [format %.3f [expr {20.0 - ($period - $wns)}]]
-    puts $csv "$cfg,$luts,$ffs,$lvl,$dly,$wns,$fmax,$s50"
+    puts $csv "$cfg,$luts,$ffs,$lvl,$dly,$wns,$fmax,$s50,$srls"
     flush $csv
-    puts "=== xl CFG=$cfg : LUT=$luts FF=$ffs levels=$lvl path=$dly ns fmax=$fmax MHz slack@50MHz=$s50 ns"
+    puts "=== xl CFG=$cfg : LUT=$luts FF=$ffs SRL=$srls levels=$lvl path=$dly ns fmax=$fmax MHz slack@50MHz=$s50 ns"
     report_timing -max_paths 1 -file $root/reports/timing_xl_cfg$cfg.txt
+    report_utilization -file $root/reports/util_xl_cfg$cfg.txt
 }
 close $csv
 catch {close_project}

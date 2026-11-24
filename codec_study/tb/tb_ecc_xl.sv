@@ -83,17 +83,29 @@ module tb_ecc_xl;
         h_valid[t] = valid;
         h_idx[t]   = idx;
         in_valid   = valid;
-        cw_in      = valid ? vec[idx][127:89] : {$urandom, $urandom};
+        junk       = {rnd(), rnd()};
+        cw_in      = valid ? vec[idx][127:89] : junk[38:0];
         t++;
     endtask
 
+    // portable pseudo-random numbers (the seeded random system function is not supported by xsim)
+    logic [31:0] rng;
+    function automatic logic [31:0] rnd();
+        rng = rng ^ (rng << 13);
+        rng = rng ^ (rng >> 17);
+        rng = rng ^ (rng << 5);
+        return rng;
+    endfunction
+
     int total_err, total_checks, seed, gaps;
+    logic [63:0] junk;
     int expect_outs;
 
     initial begin
         for (int k = 0; k < XL_NCFG; k++) begin errs[k] = 0; checks[k] = 0; outs[k] = 0; end
         seed = 1; if ($value$plusargs("seed=%d", seed)) ;
-        void'($urandom(seed));
+        rng = 32'h1ACEB00C ^ seed;
+        if (rng == 0) rng = 32'h1;
         $readmemh("ecc_vectors.hex", vec);
         nvec = 0;
         while (nvec < VMAX && !$isunknown(vec[nvec])) nvec++;
@@ -111,7 +123,7 @@ module tb_ecc_xl;
         // PHASE 2: random idle cycles
         gaps = 0;
         for (int i = 0; i < nvec; i++) begin
-            while (($urandom % 4) == 0) begin step(1'b0, 0); gaps++; end   // about 1/3 of the clocks idle
+            while ((rnd() & 3) == 0) begin step(1'b0, 0); gaps++; end   // about 1/3 of the clocks idle
             step(1'b1, i);
         end
         for (int i = 0; i < 16; i++) step(1'b0, 0);

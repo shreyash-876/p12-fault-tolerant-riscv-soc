@@ -1,0 +1,9 @@
+MODULE main
+VAR
+  light : boolean;
+ASSIGN
+  init(light) := FALSE;
+  next(light) := !light;
+
+SPEC AG (!light -> AX light)
+SPEC AG light

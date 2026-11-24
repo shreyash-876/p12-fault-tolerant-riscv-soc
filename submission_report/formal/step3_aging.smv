@@ -1,0 +1,104 @@
+MODULE main
+VAR
+  state   : {IDLE, CPU, SCR, INJ};   -- a_state_t in the RTL
+  left    : 0..3;                    -- cycles left in the controller's current operation (0 = idle)
+  dur     : 1..3;                    -- free input: how long a newly accepted operation takes
+  cpu_req : boolean;                 -- cpu_req_valid
+  scr_req : boolean;                 -- scr_req_valid
+  inj_req : boolean;                 -- inj_req_valid
+  scr_cnt : 0..20;   -- scr_wait_cnt
+  inj_cnt : 0..20;   -- inj_wait_cnt
+
+DEFINE
+  PATIENCE := 20;
+
+  -- the memory controller, as a black box
+  c_req_ready := (left = 0);
+  c_rsp_valid := (left = 1);
+
+  -- arbitration
+  bg_req    := scr_req | inj_req;
+  scr_aged  := scr_req & (scr_cnt >= PATIENCE);
+  inj_aged  := inj_req & (inj_cnt >= PATIENCE);
+  pick_scr  := scr_req & (!inj_req | (scr_aged & !inj_aged));
+  pick_inj  := inj_req & !pick_scr;
+  grant_bg  := (state = IDLE) & bg_req & (!cpu_req | scr_aged | inj_aged);
+  grant_inj := grant_bg & pick_inj;
+  grant_scr := grant_bg & pick_scr;
+  grant_cpu := (state = IDLE) & cpu_req & !grant_bg;
+
+  cpu_ready := grant_cpu & c_req_ready;
+  inj_ready := grant_inj & c_req_ready;
+  scr_ready := grant_scr & c_req_ready;
+  accept    := cpu_ready | inj_ready | scr_ready;
+
+  -- response routing, as in the RTL
+  cpu_rsp := (state = CPU) & c_rsp_valid;
+  scr_rsp := (state = SCR) & c_rsp_valid;
+  inj_rsp := (state = INJ) & c_rsp_valid;
+
+ASSIGN
+  -- arbiter state machine (the always_ff block)
+  init(state) := IDLE;
+  next(state) := case
+                   cpu_ready                   : CPU;
+                   inj_ready                   : INJ;
+                   scr_ready                   : SCR;
+                   state != IDLE & c_rsp_valid : IDLE;
+                   TRUE                        : state;
+                 esac;
+
+  -- controller: an accepted operation takes dur cycles; the response comes in its last cycle
+  init(left) := 0;
+  next(left) := case
+                  accept   : dur;
+                  left > 0 : left - 1;
+                  TRUE     : 0;
+                esac;
+
+  init(scr_cnt) := 0;
+  next(scr_cnt) := case
+                     !scr_req | scr_ready : 0;
+                     scr_cnt < PATIENCE   : scr_cnt + 1;
+                     TRUE                 : scr_cnt;
+                   esac;
+  init(inj_cnt) := 0;
+  next(inj_cnt) := case
+                     !inj_req | inj_ready : 0;
+                     inj_cnt < PATIENCE   : inj_cnt + 1;
+                     TRUE                 : inj_cnt;
+                   esac;
+
+  -- requesters: hold the request until it is accepted, don't ask again until the
+  -- own response has come back, otherwise free to ask at any time
+  next(cpu_req) := case
+                     cpu_req & !cpu_ready       : TRUE;
+                     cpu_ready                  : FALSE;
+                     state = CPU & !c_rsp_valid : FALSE;
+                     TRUE                       : {FALSE, TRUE};
+                   esac;
+  next(scr_req) := case
+                     scr_req & !scr_ready       : TRUE;
+                     scr_ready                  : FALSE;
+                     state = SCR & !c_rsp_valid : FALSE;
+                     TRUE                       : {FALSE, TRUE};
+                   esac;
+  next(inj_req) := case
+                     inj_req & !inj_ready       : TRUE;
+                     inj_ready                  : FALSE;
+                     state = INJ & !c_rsp_valid : FALSE;
+                     TRUE                       : {FALSE, TRUE};
+                   esac;
+
+-- Safety
+INVARSPEC count(cpu_ready, scr_ready, inj_ready) <= 1
+INVARSPEC accept -> (state = IDLE & left = 0)
+INVARSPEC (state = IDLE) <-> (left = 0)
+SPEC AG (cpu_ready -> AX A [ (state = CPU & !scr_rsp & !inj_rsp) U cpu_rsp ])
+SPEC AG (scr_ready -> AX A [ (state = SCR & !cpu_rsp & !inj_rsp) U scr_rsp ])
+SPEC AG (inj_ready -> AX A [ (state = INJ & !cpu_rsp & !scr_rsp) U inj_rsp ])
+
+-- Liveness
+SPEC AG (cpu_req -> AF cpu_ready)
+SPEC AG (scr_req -> AF scr_ready)
+SPEC AG (inj_req -> AF inj_ready)

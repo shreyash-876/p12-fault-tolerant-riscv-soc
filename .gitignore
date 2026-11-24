@@ -4,7 +4,6 @@
 
 # Vivado project caches, runs, temporary files
 vivado/
-vivado_fw/
 **/vivado_daec/
 **/.Xil/
 **/*.jou

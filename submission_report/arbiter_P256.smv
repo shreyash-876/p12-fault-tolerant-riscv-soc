@@ -1,0 +1,146 @@
+-- =============================================================================
+-- mem_arbiter.smv  : abstract model of rtl/mem/mem_arbiter.sv for NuSMV 2.6
+-- Variant: correct   PATIENCE = 256   controller busy 1..3 cycles per operation
+--
+-- One NuSMV step = one clock cycle.  The arbitration logic (DEFINE section) is a
+-- line-by-line transcription of the RTL.  Abstractions (each one is sound for the
+-- properties below):
+--   * addresses / data / ops are dropped (they never affect who is granted);
+--   * the 16-bit wait counters are replaced by counters that saturate at PATIENCE,
+--     because the RTL only ever tests "counter >= PATIENCE";
+--   * the memory controller is a black box: it is ready exactly when no operation
+--     is in flight, and each accepted operation takes any 1..3 cycles (free choice);
+--   * the three requesters are free environments with the bus rules of mem_pkg:
+--     a request is held until it is accepted, and a requester does not ask again
+--     until its own response has come back.
+-- =============================================================================
+MODULE main
+VAR
+  state    : {IDLE, CPU, SCR, INJ};   -- arbiter state, as in the RTL
+  left     : 0..3;                  -- cycles left in the operation in flight (0 = controller idle)
+  dur      : 1..3;                  -- free input: length of an operation accepted in this cycle
+  scr_cnt  : 0..256;                  -- scr_wait_cnt (saturating at PATIENCE)
+  inj_cnt  : 0..256;                  -- inj_wait_cnt (saturating at PATIENCE)
+  cpu_req  : boolean;                 -- cpu_req_valid
+  scr_req  : boolean;                 -- scr_req_valid
+  inj_req  : boolean;                 -- inj_req_valid
+  -- measurement only: how many cycles the current request has already waited
+  cpu_wait : 0..9;
+  scr_wait : 0..9;
+  inj_wait : 0..9;
+
+DEFINE
+  PATIENCE := 256;
+  c_req_ready := (left = 0);
+  c_rsp_valid := (left = 1);
+
+  -- ---------------- transcription of mem_arbiter.sv ----------------
+  bg_req    := scr_req | inj_req;
+  scr_aged  := scr_req & (scr_cnt >= PATIENCE);
+  inj_aged  := inj_req & (inj_cnt >= PATIENCE);
+  pick_scr  := scr_req & (!inj_req | (scr_aged & !inj_aged));
+  pick_inj  := inj_req & !pick_scr;
+  grant_bg  := (state = IDLE) & bg_req & (!cpu_req | scr_aged | inj_aged);
+  grant_inj := grant_bg & pick_inj;
+  grant_scr := grant_bg & pick_scr;
+  grant_cpu := (state = IDLE) & cpu_req & !grant_bg;
+
+  cpu_ready := grant_cpu & c_req_ready;
+  inj_ready := grant_inj & c_req_ready;
+  scr_ready := grant_scr & c_req_ready;
+  accept    := cpu_ready | inj_ready | scr_ready;
+
+  cpu_rsp   := (state = CPU) & c_rsp_valid;
+  scr_rsp   := (state = SCR) & c_rsp_valid;
+  inj_rsp   := (state = INJ) & c_rsp_valid;
+
+ASSIGN
+  init(state) := IDLE;
+  next(state) := case
+                   cpu_ready                 : CPU;
+                   inj_ready                 : INJ;
+                   scr_ready                 : SCR;
+                   state != IDLE & c_rsp_valid : IDLE;
+                   TRUE                      : state;
+                 esac;
+
+  -- memory controller (black box)
+  init(left) := 0;
+  next(left) := case
+                  accept   : dur;
+                  left > 0 : left - 1;
+                  TRUE     : 0;
+                esac;
+
+  -- wait counters, as in the RTL (saturating at PATIENCE instead of 16'hFFFF)
+  init(scr_cnt) := 0;
+  next(scr_cnt) := case
+                     !scr_req | scr_ready : 0;
+                     scr_cnt < PATIENCE   : scr_cnt + 1;
+                     TRUE                 : scr_cnt;
+                   esac;
+  init(inj_cnt) := 0;
+  next(inj_cnt) := case
+                     !inj_req | inj_ready : 0;
+                     inj_cnt < PATIENCE   : inj_cnt + 1;
+                     TRUE                 : inj_cnt;
+                   esac;
+
+  -- environments: hold a request until accepted; no new request while own operation is in flight
+  init(cpu_req) := {FALSE, TRUE};
+  next(cpu_req) := case
+                     cpu_req & !cpu_ready        : TRUE;
+                     cpu_ready                   : FALSE;
+                     state = CPU & !c_rsp_valid  : FALSE;
+                     TRUE                        : {FALSE, TRUE};
+                   esac;
+  init(scr_req) := {FALSE, TRUE};
+  next(scr_req) := case
+                     scr_req & !scr_ready        : TRUE;
+                     scr_ready                   : FALSE;
+                     state = SCR & !c_rsp_valid  : FALSE;
+                     TRUE                        : {FALSE, TRUE};
+                   esac;
+  init(inj_req) := {FALSE, TRUE};
+  next(inj_req) := case
+                     inj_req & !inj_ready        : TRUE;
+                     inj_ready                   : FALSE;
+                     state = INJ & !c_rsp_valid  : FALSE;
+                     TRUE                        : {FALSE, TRUE};
+                   esac;
+
+  -- measurement counters (cycles already waited by the current request)
+  init(cpu_wait) := 0;
+  next(cpu_wait) := (cpu_req & !cpu_ready) ? (cpu_wait < 9 ? cpu_wait + 1 : 9) : 0;
+  init(scr_wait) := 0;
+  next(scr_wait) := (scr_req & !scr_ready) ? (scr_wait < 9 ? scr_wait + 1 : 9) : 0;
+  init(inj_wait) := 0;
+  next(inj_wait) := (inj_req & !inj_ready) ? (inj_wait < 9 ? inj_wait + 1 : 9) : 0;
+
+-- ============================ PROPERTIES ====================================
+-- S1  at most one requester is accepted in any cycle
+INVARSPEC count(cpu_ready, scr_ready, inj_ready) <= 1
+-- S2  an operation is accepted only when nobody owns the controller (atomicity)
+INVARSPEC accept -> (state = IDLE & left = 0)
+-- S3  the arbiter state and the controller agree: owner exists <=> operation in flight
+INVARSPEC (state = IDLE) <-> (left = 0)
+-- S4  response routing: an accepted operation keeps its owner until its response, and the
+--     response goes to that owner (no other requester gets a response in between)
+SPEC AG (cpu_ready -> AX A [ (state = CPU & !scr_rsp & !inj_rsp) U cpu_rsp ])
+SPEC AG (scr_ready -> AX A [ (state = SCR & !cpu_rsp & !inj_rsp) U scr_rsp ])
+SPEC AG (inj_ready -> AX A [ (state = INJ & !cpu_rsp & !scr_rsp) U inj_rsp ])
+
+-- L1  the CPU is never starved: every CPU request is eventually accepted
+SPEC AG (cpu_req -> AF cpu_ready)
+-- L2  the scrubber is never starved
+SPEC AG (scr_req -> AF scr_ready)
+-- L3  the injector is never starved
+SPEC AG (inj_req -> AF inj_ready)
+-- the requests really can be made (non-vacuity)
+SPEC EF cpu_ready & EF scr_ready & EF inj_ready
+SPEC EF (cpu_req & scr_req & inj_req & state = IDLE)
+
+
+-- B1  bounded CPU wait at the real PATIENCE (the CPU bound does not depend on PATIENCE)
+INVARSPEC cpu_wait <= 8
+SPEC EF cpu_wait = 8
